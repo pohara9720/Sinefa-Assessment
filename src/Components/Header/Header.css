@@ -1,0 +1,27 @@
+.navbar-fixed {
+	position: absolute;
+	z-index:999999999;
+}
+
+.logo{
+	padding-left: 30px;
+	color: white;
+
+}
+nav ul a{
+	padding: 0 70px;
+	letter-spacing: 3px;
+	color: black;
+}
+nav ul a:focus{
+	border: none;
+}
+/*i .material-icons{*/
+	/*display: none;*/
+/*}*/
+.hamburger,.hamburger:hover{
+	display: none;
+	background-color: transparent;
+	border:none;
+	box-shadow: none;
+}

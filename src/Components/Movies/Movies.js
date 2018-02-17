@@ -1,46 +1,77 @@
 import React, { Component } from 'react'
 import './Movies.css'
 import '../../global.css'
+import { Row, Col,ProgressBar,Button,Toast } from 'react-materialize'
 
 class Movies extends Component {
-	constructor(props){
-		super(props)
+    constructor(props){
+        super(props)
 
-		this.state={
-			movies:[],
-			images:[]
-		}
-	}
+        this.state={
+            cats:[],
+            saved:[],
+            banner:false
+        }
+    }
 
-	componentWillMount(){
-		// fetch('http://www.img.omdbapi.com/?apikey=5fc5100d?y=2017')
-  //     .then((response) => response.json())
-  //     .then((responseJson) => {
-  //       console.log('This is the JSON response',responseJson)
-  //       this.setState({
-  //         movies:responseJson
-  //       })
-  //     })
-  //     .catch((error) => {
-  //       console.error(error)
-  //     })
-  
-		return fetch("http://www.omdbapi.com/?apikey=5fc5100d?y=2017")
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log("This is the JSON response",responseJson);
-        this.setState({
-          images:responseJson
-        })
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-	
+    
+    componentWillMount(){
+    
+        return fetch('http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=aDwpw0FkNBMm4J7e2jQNoD7Q0VvgT79b')
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({cats:responseJson})
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
+
+    SaveDataToLocalStorage(object){
+        var array = []
+        var get = localStorage.getItem('Saved')
+        var parse = JSON.parse(get)
+
+        if (parse === null) {
+
+            var firstSaved = array.concat(object)
+            var convert = JSON.stringify(firstSaved)
+            localStorage.setItem('Saved',convert)
+        }
+        else {
+            var newSaved = parse.concat(object)
+            var convertToString = JSON.stringify(newSaved)
+            localStorage.setItem('Saved',convertToString)
+        }
+        this.setState({banner:true})
+        setTimeout(() => this.setState({banner:false}), 3000)
+    }
+
     render() {
+
+        let cats 
+        this.state.cats.length === 0 ? 
+            cats = <ProgressBar /> :
+            cats = this.state.cats.data.map((cat,index) => 
+                <center key={index}>
+                    <Col s={12} m={4} l={4}>
+                        <div className='imageCon'>
+                            <p className='shadow'>{cat.title}</p>
+                            <img className='pictures' src={`${cat.images.original.url}`}/>
+                            <Button onClick={() => this.setState({saved: this.SaveDataToLocalStorage(cat)})} className='gifBtn'>Save Gif</Button>
+                        </div>
+                    </Col>
+                </center>
+            )
         return (
-            <div className="movies">MOVIES</div>
+            <div className='container-movies'>
+                <div className={this.state.banner === true ? 'toastShow' : 'toast'}>This gif has been saved!</div>
+                <div className='block'>
+                    <Row id="gifs">
+                        {cats}
+                    </Row>
+                </div>
+            </div>
         )
     }
 }

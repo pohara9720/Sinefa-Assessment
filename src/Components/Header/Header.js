@@ -5,34 +5,36 @@ import { Link } from 'react-router-dom'
 import {SideNav, SideNavItem,Button,Icon} from 'react-materialize'
 
 class Header extends Component {
+    constructor(props){
+        super(props)
+
+        this.state={
+
+        }
+
+    }
     render() {
         const side = 
     <SideNav
         trigger={<Button className='hamburger'><Icon >menu</Icon></Button>}
         options={{ closeOnClick: true }}
     >
-        <SideNavItem userView
-            user={{
-                background: 'img/office.jpg',
-                image: 'img/yuna.jpg',
-                name: 'John Doe',
-                email: 'jdandturk@gmail.com'
-            }}
-        />
-        <SideNavItem href='#!icon' icon='cloud'>First Link With Icon</SideNavItem>
-        <SideNavItem href='#!second'>Second Link</SideNavItem>
-        <SideNavItem href='#!second'>Second Link</SideNavItem>
-        <SideNavItem href='#!second'>Second Link</SideNavItem>
+        <h3><span className='check'>Check</span><span className='neon'>Meowt</span></h3>
+        <SideNavItem href='/'>Home</SideNavItem>
+        <SideNavItem href='/movies'>Cat Gifs</SideNavItem>
+        <SideNavItem href='/watchlist'>Saved Gifs</SideNavItem>
+        
     </SideNav>    
         return (
-            <div className='navbar-fixed'>
+            <div className='navbar navRelative'>
                 <nav>
-                {side}
+                    {side}
                     <div className="nav-wrapper">
-                        <ul id="nav-mobile" className="right hide-on-med-and-down">
-                            <li><Link to='/'>About</Link></li>
-                            <li><Link to='/movies'>Movies</Link></li>
-                            <li><Link to='/watchlist'>Watch List</Link></li>
+                        <Link to='/' className='right shadow'>CheckMeowt</Link>
+                        <ul id="nav-mobile" className="left hide-on-med-and-down">
+                            <li><Link to='/'>Home</Link></li>
+                            <li><Link to='/movies'>Cats Gifs</Link></li>
+                            <li><Link to='/watchlist'>Saved Cats</Link></li>
                         </ul>
                     </div>
                 </nav>

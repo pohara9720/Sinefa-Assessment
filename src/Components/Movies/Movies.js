@@ -17,7 +17,7 @@ class Movies extends Component {
     
     componentWillMount(){
     
-        return fetch('http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=aDwpw0FkNBMm4J7e2jQNoD7Q0VvgT79b')
+        return fetch('https://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=aDwpw0FkNBMm4J7e2jQNoD7Q0VvgT79b')
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({cats:responseJson})

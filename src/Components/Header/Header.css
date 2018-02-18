@@ -61,6 +61,9 @@ and (max-device-width : 667px) {
 nav ul a {
 	display: none;
 }
+.number2{
+	color: transparent;
+}
 
 }
 
@@ -78,6 +81,9 @@ and (max-device-width : 640px) {
 .right{
 	display: none;
 } 
+.number2{
+	color: transparent;
+}
 }
 
 

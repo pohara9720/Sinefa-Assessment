@@ -14,17 +14,28 @@ class Header extends Component {
 
     }
     render() {
-        const side = 
+        const side = <div>
     <SideNav
         trigger={<Button className='hamburger'><Icon >menu</Icon></Button>}
         options={{ closeOnClick: true }}
+        id={1}
     >
         <h3><span className='check'>Check</span><span className='neon'>Meowt</span></h3>
         <SideNavItem href='/'>Home</SideNavItem>
         <SideNavItem href='/movies'>Cat Gifs</SideNavItem>
         <SideNavItem href='/watchlist'>Saved Gifs</SideNavItem>
-        
+    </SideNav> 
+    <SideNav
+        trigger={<Button className='hamburger number2'><Icon >menu</Icon></Button>}
+        options={{ closeOnClick: true }}
+        id={2}
+    >
+        <h3><span className='check'>Check</span><span className='neon'>Meowt</span></h3>
+        <SideNavItem href='/'>Home</SideNavItem>
+        <SideNavItem href='/movies'>Cat Gifs</SideNavItem>
+        <SideNavItem href='/watchlist'>Saved Gifs</SideNavItem>
     </SideNav>    
+</div>
         return (
             <div className='navbar navRelative'>
                 <nav>

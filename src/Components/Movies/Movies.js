@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import './Movies.css'
 import '../../global.css'
-import { Row, Col,ProgressBar,Button,Toast } from 'react-materialize'
+import { Row, Col,ProgressBar,Button} from 'react-materialize'
+
 
 class Movies extends Component {
     constructor(props){
@@ -27,6 +28,11 @@ class Movies extends Component {
             })
     }
 
+    banner(){
+        this.setState({banner:true})
+        setTimeout(() => this.setState({banner:false}), 3000)
+    }
+
     SaveDataToLocalStorage(object){
         var array = []
         var get = localStorage.getItem('Saved')
@@ -43,12 +49,19 @@ class Movies extends Component {
             var convertToString = JSON.stringify(newSaved)
             localStorage.setItem('Saved',convertToString)
         }
-        this.setState({banner:true})
-        setTimeout(() => this.setState({banner:false}), 3000)
+        this.banner()
     }
 
-    render() {
+    upperCase(string){
+        return string.charAt(0).toUpperCase() + string.slice(1)
+    }
 
+
+
+
+
+    render() {
+        console.log(this.state.cats)
         let cats 
         this.state.cats.length === 0 ? 
             cats = <ProgressBar /> :
@@ -56,7 +69,7 @@ class Movies extends Component {
                 <center key={index}>
                     <Col s={12} m={4} l={4}>
                         <div className='imageCon'>
-                            <p className='shadow'>{cat.title}</p>
+                            <p className='shadow'>{this.upperCase(cat.title)}</p>
                             <img className='pictures' src={`${cat.images.original.url}`}/>
                             <Button onClick={() => this.setState({saved: this.SaveDataToLocalStorage(cat)})} className='gifBtn'>Save Gif</Button>
                         </div>
@@ -77,3 +90,4 @@ class Movies extends Component {
 }
 
 export default Movies
+
